@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/8cf4a79c-6011-447f-8197-f3b2a2979569/resourceGroups/HYSZaureLearning_Sprint1/providers/Microsoft.Web/sites/hys-azure-course-sprint1-v2",
+    "appService.deploySubpath": "WebApi"
+}
