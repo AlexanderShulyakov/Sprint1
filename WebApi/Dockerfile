@@ -14,4 +14,4 @@ WORKDIR /App
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "WebApi.dll"]
 EXPOSE 80
-
+EXPOSE 443
