@@ -10,7 +10,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<WeatherContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+using (var context = scope.ServiceProvider.GetService<WeatherContext>())
+    context.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();
@@ -36,8 +40,3 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast")
 .WithOpenApi();
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
