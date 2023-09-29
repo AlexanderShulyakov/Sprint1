@@ -1,28 +1,19 @@
-// using Microsoft.EntityFrameworkCore;
-// using System;
-// using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
-// public class WeatherContext : DbContext
-// {
-//     public DbSet<Record> Records { get; set; }
+public class WeatherContext : DbContext
+{
+    public DbSet<Record> Records { get; set; }
 
-//     public string DbPath { get; }
-
-//     public WeatherContext()
-//     {
+    public WeatherContext(DbContextOptions<WeatherContext> options) : base(options)
+    {
        
-//     }
+    }
 
-//     // The following configures EF to create a Sqlite database file in the
-//     // special "local" folder for your platform.
-//     protected override void OnConfiguring(DbContextOptionsBuilder options)
-//         => options.UseSqlServer($"Data Source={DbPath}");
-// }
 
-// public class Record
-// {
-//     public DateOnly Date { get; set; }
-//     public int TemperatureC { get; set; }
-//     public int TemperatureF { get; set; }
-//     public string? Summary { get; set; }
-// }
+public class Record
+{
+    public DateOnly Date { get; set; }
+    public int TemperatureC { get; set; }
+    public int TemperatureF { get; set; }
+    public string? Summary { get; set; }
+}
