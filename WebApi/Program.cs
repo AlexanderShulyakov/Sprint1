@@ -12,6 +12,7 @@ builder.Services.AddDbContext<WeatherContext>(options =>
 
 
 var app = builder.Build();
+//Ensure DB creation and migrations applying
 using (var scope = app.Services.CreateScope())
 using (var context = scope.ServiceProvider.GetService<WeatherContext>())
     context.Database.Migrate();
@@ -19,24 +20,5 @@ using (var context = scope.ServiceProvider.GetService<WeatherContext>())
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapProductEndpoints();
 app.Run();
